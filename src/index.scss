@@ -1,0 +1,92 @@
+$primary : orange;
+$jumbo : #000000;
+$text: #fff;
+$text-hover: rgb(0, 117, 0);
+$font-weights: (
+  "thin": 100,
+  "regular": 400,
+  "bold" : 700,
+  "ultra-bold" : 900
+);
+
+$color: (
+  'macabra': rgb(184, 27, 27),
+  'nature': rgb(150, 233, 124),
+);
+
+$bg: (
+  'macabra': rgb(61, 0, 0),
+  'nature': rgb(64, 143, 40),
+);
+
+
+
+@mixin hover($size : 10px) {
+  color: $text-hover;
+  font-weight: map-get($font-weights , ultra-bold);
+  font-size: $size;
+  cursor: pointer;
+}
+
+
+@function peso($nomePeso) {
+  @return map-get($font-weights , $nomePeso )
+}
+
+;
+
+@function tema($tema) {
+  @return map-get($color , $tema)
+};
+
+body {
+  background: $primary;
+
+  p {
+    color: $text;
+    font-weight: map-get($font-weights , bold);
+    transition: 1s;
+  }
+
+  main {
+    margin: 0 auto;
+    width: 700px;
+    font-weight: peso(regular);
+
+    p {
+      color: $jumbo;
+      font-weight: map-get($font-weights , thin);
+
+      &:hover {
+        @include hover(32px)
+      }
+    }
+  }
+
+  .tematica {
+    p {
+      color: tema(macabra);
+
+    }
+  }
+}
+
+@mixin theme($light-theme : true){
+  @if $light-theme {
+    background: #fff;
+    color: #000000;
+  } @else{
+    color: #fff !important; 
+    background: #000000;
+  }
+}
+
+.light{
+  @include theme($light-theme : false)
+}
+
+.tamanho{
+  background: wheat;
+  height: 20px;
+  width: 300px - 200px;
+}
